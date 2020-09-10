@@ -7,7 +7,19 @@ from api import rc as client
 class CrudModel:
     ModelCounter = 0
 
+    @staticmethod
+    def create(data: dict) -> Union[dict, None]:
+        if not data:
+            return None
 
+        if not data.get('message'):
+            return None
+
+        CrudModel.ModelCounter += 1
+
+        client.set(CrudModel.ModelCounter, json.dumps(data))
+        
+        return {'message' : 'created'}
 
     @staticmethod
     def read_all() -> Union[dict, None]:
