@@ -1,3 +1,6 @@
-import redis
 
-rc = redis.Redis()
+from api import rc as client
+
+class CrudModel:
+
+    pass
