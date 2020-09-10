@@ -58,6 +58,14 @@ class CrudModel:
 
         return {'message' : 'updated'}
         
+    @staticmethod
+    def delete(id: int) -> Union[dict, None]:
+        
+        if not client.get(id):
+            return None
+        
+        client.delete(id)
+        return {'message' : 'deleted'}
 
     @staticmethod
     def flushit():
