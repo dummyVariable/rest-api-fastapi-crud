@@ -23,3 +23,9 @@ def test_for_update():
     assert db.update(1, {'message' : 'ice cream'}) == {'message' : 'updated'}
     assert db.read(1) == {'message' : 'ice cream'}
     
+def test_for_delete():
+
+    assert db.delete(1) == {'message' : 'deleted'}
+    assert len(db.read_all()) == 1
+    assert db.read(1) == None
+    assert db.delete(42) == None
