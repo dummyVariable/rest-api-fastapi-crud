@@ -40,3 +40,13 @@ def create(message: Message) -> dict:
     
     return resp
 
+@router.put('/{id}')
+def update(id: int, message:Message) -> dict:
+    data = {}
+    data['message'] = message.message
+    resp = db.update(id, data)
+
+    if not resp:
+        return {'message' : 'item not exists'}
+    
+    return resp
