@@ -11,4 +11,3 @@ def home():
 
 app.include_router(crud.router, prefix='/crud')
 
-run(app)
