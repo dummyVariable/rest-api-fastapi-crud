@@ -1,4 +1,7 @@
+import json 
+
 import requests as req
+
 from api.model import CrudModel as db
 
 URL = 'http://localhost:8000/crud'
@@ -18,13 +21,15 @@ def test_for_emptyness():
 
 def test_for_create():
 
-    resp1 = req.post(URL, data={'message' : 'Im batman'})
-    assert resp1.json() == {'message' : 'created'}
+    data = json.dumps({'message' : 'Im batman'})
+    resp1 = req.post(URL, data=data)
+    assert resp1.json() == {'message' : 'created'}  
     
     resp2 = req.get(URL + '/1')
     assert resp2.json() == {'message' : 'Im batman'}
-    
-    resp3 = req.post(URL, data={'message' : 'Michael Scorn'})
+
+    data = json.dumps({'message' : 'Michael Scorn'})
+    resp3 = req.post(URL, data=data)
     assert resp3.json() == {'message' : 'created'}
 
     resp4 = req.get(URL + '/2')
