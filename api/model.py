@@ -8,16 +8,16 @@ class CrudModel:
     ModelCounter = 0
 
     @staticmethod
-    def create(data: dict) -> Union[dict, None]:
-        if not data:
+    def create(message: dict) -> Union[dict, None]:
+        if not message:
             return None
 
-        if not data.get('message'):
+        if not message.get('message'):
             return None
 
         CrudModel.ModelCounter += 1
 
-        client.set(CrudModel.ModelCounter, json.dumps(data))
+        client.set(CrudModel.ModelCounter, json.dumps(message))
         
         return {'message' : 'created'}
 
@@ -44,6 +44,20 @@ class CrudModel:
             return json.loads(data)
 
         return None
+
+    @staticmethod
+    def update(id: int, message: dict) -> Union[dict, None]:
+        
+        if not client.get(id):
+            return None
+        
+        if not message.get('message'):
+            return None
+
+        client.set(id, json.dumps(message))
+
+        return {'message' : 'updated'}
+        
 
     @staticmethod
     def flushit():
