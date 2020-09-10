@@ -50,3 +50,12 @@ def update(id: int, message:Message) -> dict:
         return {'message' : 'item not exists'}
     
     return resp
+
+@router.delete('/{id}')
+def delete(id: int) -> dict:
+    resp = db.delete(id)
+
+    if not resp:
+        return {'message' : 'item not exists'}
+
+    return resp
