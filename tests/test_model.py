@@ -17,3 +17,9 @@ def test_for_create():
     assert len(db.read_all()) == 2
 
     assert db.create({'bla':1}) == None
+
+def test_for_update():
+
+    assert db.update(1, {'message' : 'ice cream'}) == {'message' : 'updated'}
+    assert db.read(1) == {'message' : 'ice cream'}
+    
