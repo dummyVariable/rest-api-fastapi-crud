@@ -46,3 +46,14 @@ def test_for_update():
 
     resp2 = req.get(URL + '/1')
     assert resp2.json() == {'message' : 'Im Scotch'}
+
+def test_for_delete():
+
+    resp1 = req.delete(URL + '/1')
+    assert resp1.json() == {'message' : 'deleted'}
+
+    resp2 = req.get(URL + '/1')
+    assert resp2.json() == {'message' : 'item not found'}
+
+    resp3 = req.get(URL)
+    assert len(resp3.json()) == 1
