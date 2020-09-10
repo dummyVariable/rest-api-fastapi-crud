@@ -1,8 +1,13 @@
 from typing import Union
+import json
 
 from api import rc as client
 
+
 class CrudModel:
+    ModelCounter = 0
+
+
 
     @staticmethod
     def read_all() -> Union[dict, None]:
@@ -13,7 +18,8 @@ class CrudModel:
 
         data = []
         for key in keys:
-            data.append(client.get(key))
+            message = client.get(key)
+            data.append(json.loads(message))
 
         return data
     
@@ -23,6 +29,10 @@ class CrudModel:
         data = client.get(id)
 
         if data:
-            return data
+            return json.loads(data)
 
         return None
+
+    @staticmethod
+    def flushit():
+        client.flushall()
