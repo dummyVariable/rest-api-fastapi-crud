@@ -1,10 +1,12 @@
 import requests as req
+from api.model import CrudModel as db
 
 URL = 'http://localhost:8000/crud'
 
 def test_for_home():
     resp = req.get('http://localhost:8000')
     assert resp.json() == {'message' : 'crud app'}
+    db.flushit()
 
 def test_for_emptyness():
 
