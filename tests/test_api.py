@@ -37,3 +37,12 @@ def test_for_create():
 
     resp5 = req.get(URL)
     assert len(resp5.json()) == 2
+
+def test_for_update():
+
+    data = json.dumps({'message' : 'Im Scotch'})
+    resp1 = req.put(URL + '/1', data=data)
+    assert resp1.json() == {'message' : 'updated'}
+
+    resp2 = req.get(URL + '/1')
+    assert resp2.json() == {'message' : 'Im Scotch'}
